@@ -13,7 +13,7 @@
 .vertical {
   display: grid;
   gap: 24px;
-  /* 消しても見た目に変化はないが、おまじない的に入れておいてもいいかも */
+  /* 垂直方向。この場合は消しても見た目に変化はないが、heightを指定する場合は必要 */
   align-content: start;
 }
 
