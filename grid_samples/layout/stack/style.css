@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+/* ================
+
+レイアウトの設定
+
+================ */
+
+/* ここから */
+
+/* 縦並び */
+/* NOTE: グリッドコンテナは自動配置する */
+.vertical {
+  display: grid;
+  gap: 24px;
+  /* 消しても見た目に変化はないが、おまじない的に入れておいてもいいかも */
+  align-content: start;
+}
+
+/* 横並び */
+/* NOTE: グリッドコンテナは自動配置する */
+.horizontal {
+  display: grid;
+  /* 自動配置のための設定 */
+  grid-auto-flow: column;
+  gap: 24px;
+  /* viewpointまで横に広がったグリッドコンテナを小さくする */
+  justify-content: start;
+}
+
+/* ここまで */
