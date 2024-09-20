@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+/* ================
+
+レイアウトの設定
+
+================ */
+
+/* ここから */
+
+/* ヘッダー */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* 暗黙的なグリッドを列方向に配置 */
+  grid-auto-flow: column;
+  gap: 8px;
+  align-items: center;
+  padding: 16px;
+
+  /* アイコンと Home, Service, Contanct の文字のパディング調整 */
+  .action,
+  .nav a {
+    padding: 12px;
+  }
+}
+
+/* ここまで */
