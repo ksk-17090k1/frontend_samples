@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+/* ================
+
+レイアウトの設定
+
+================ */
+
+/* ここから */
+
+.pancake {
+  display: grid;
+  /* overflow対策のためminはautoではなく0にする */
+  grid-template-columns: minmax(0, auto);
+  grid-template-rows: auto 1fr auto;
+  /* ブラウザのスクロールバーを表示させるためheightを指定 */
+  /* iphone対策のため、heightはvhでなくsvhを使う */
+  min-height: 100svh;
+
+  > .main {
+    justify-self: center;
+    /* このwidthのある意味がわからないが、あったほうがいいときがあるらしい */
+    width: 100%;
+    max-width: 672px;
+    padding: 16px 16px 80px;
+  }
+}
+
+/* ヘッダー */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-auto-flow: column;
+  gap: 8px;
+  align-items: center;
+  padding: 16px;
+
+  /* タップターゲットを拡張 */
+  .action,
+  .nav a {
+    padding: 12px;
+  }
+}
+
+/* 横並びメニュー */
+.horizontal {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 24px;
+  justify-content: start;
+}
+
+/* ここまで */

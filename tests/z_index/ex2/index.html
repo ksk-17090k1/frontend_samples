@@ -1,0 +1,105 @@
+<!-- ref: https://ics.media/entry/200609/ -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>スタッキングコンテキスト同士の高低</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="section section1" id="section1">
+        <h1>z-indexがあるもの同士</h1>
+        <div class="position-wrapper">
+          <div class="position position1">
+            <span class="innerText">z-index:10</span>
+          </div>
+          <div class="position position2">
+            <span class="innerText">z-index:5</span>
+          </div>
+        </div>
+        <p>ごく普通にz-indexの値が大きいものが上になります。</p>
+      </section>
+
+      <section class="section section2" id="section2">
+        <h1>z-indexがあるものとないもの</h1>
+        <div class="position-wrapper">
+          <div class="position position3">
+            <span class="innerText">z-index:10</span>
+          </div>
+          <div class="stacking-context stacking-context1">
+            transform:translate(50px,50px)
+          </div>
+        </div>
+        <p>
+          z-indexが1以上のものと、その他のスタッキングコンテキストを比べたら、z-indexがある要素が上になります。
+        </p>
+      </section>
+
+      <section class="section section3" id="section3">
+        <h1>z-indexが0とないもの</h1>
+        <div class="position-wrapper">
+          <div class="position position4">
+            <span class="innerText">z-index:0</span>
+          </div>
+          <div class="stacking-context stacking-context1">
+            transform:translate(50px,50px)
+          </div>
+        </div>
+        <p>z-indexが0だと、要素の出現順で後のものが上になります。</p>
+      </section>
+
+      <section class="section section4" id="section4">
+        <h1>z-indexが同じ値</h1>
+        <div class="position-wrapper">
+          <div class="position position1">
+            <span class="innerText"> z-index:10</span>
+          </div>
+          <div class="position position5">
+            <span class="innerText">z-index:10</span>
+          </div>
+        </div>
+        <p>z-indexの値が同じ場合は要素の出現順で後のものが上になります。</p>
+      </section>
+
+      <section class="section section5" id="section5">
+        <h1>z-indexが同じ値（order）</h1>
+        <div class="flex-wrapper">
+          <div class="flex-child flex-child1">z-index:10、order:2</div>
+          <div class="flex-child flex-child2">z-index:10、order:1</div>
+        </div>
+        <p>
+          orderプロパティを使って出現順を入れ替えた場合、order順が後のものが上になります。
+        </p>
+      </section>
+      <section class="section section6" id="section6">
+        <h1>z-indexが負でも<br />親スタックより後ろにはいけない</h1>
+        <div class="position-wrapper" style="z-index: 1">
+          <div class="position position6">
+            <span class="innerText">z-index:-1</span>
+          </div>
+        </div>
+        <p>
+          親要素（position-wrapper）にスタッキングコンテキストが発生しているので、それより後ろには配置できません。
+        </p>
+      </section>
+
+      <section class="section section8" id="section8">
+        <h1>z-indexがなくても<br />スタッキングコンテキストっぽく振る舞う</h1>
+        <div class="position-wrapper">
+          <span class="under">下のレイヤーの文</span>
+          <div class="stacking-context stacking-context2">
+            transform:translate(50px,50px)
+          </div>
+          <div class="position position7">
+            <span class="innerText">position:absolute <br />z-index:auto</span>
+          </div>
+        </div>
+        <p>
+          z-index:autoの高低関係はz-index:0の挙動と同じ。後の要素が上になります。<br />
+          スタッキングコンテキストは発生していませんが、要素順でpositionの方が後なのでtranslateの要素より上に来ます。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

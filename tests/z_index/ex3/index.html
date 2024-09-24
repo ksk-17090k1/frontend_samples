@@ -1,0 +1,52 @@
+<!-- ref: https://ics.media/entry/200609/ -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>予期せぬ重なり</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <section class="section" id="section1">
+        <h1>俺の屍を越えてゆけ現象</h1>
+        <div class="position-wrapper">
+          <span class="under">下のレイヤーの文</span>
+          <div class="position">
+            z-index:auto
+            <div class="inner">positionの子要素</div>
+          </div>
+          <div class="stacking-context">transform:translate(50px,50px)</div>
+        </div>
+        <p class="description">
+          positionの要素が先なので下側、transformの要素が上にきています。<br />
+          しかし、positionにはスタッキングコンテキストは発生していませんので、その子のposition要素のz-indexはtransformの要素と比べます。z-indexが1なので、transformの要素よりもさらに上にきます。<br />
+          つまり、親要素より上の要素を、子が上回ることになります。
+        </p>
+      </section>
+
+      <section class="section" id="section2">
+        <h1>ホバーでスタッキングコンテキストが発生</h1>
+        <p>これは .new に z-index: 1; を入れれば解決する</p>
+        <div class="card">
+          <div class="new">NEW</div>
+          <div class="card-inner">
+            <img
+              src="../images/demo_image.jpg"
+              alt=""
+              width="300"
+              class="image"
+            />
+            <h1 class="title">記事タイトル</h1>
+            <p class="article-description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum
+              perferendis repellendus ullam. Ipsam laborum magni repudiandae.
+              Assumenda, consequatur consequuntur debitis dignissimos, dolorem
+              ea eligendi ipsam nostrum odit placeat quia, voluptatum?
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+.wrapper {
+  position: relative;
+}
+.wrapper > div {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  text-align: center;
+  line-height: 250px;
+  margin-left: -175px;
+}
+.freezer {
+  background-color: rgba(233, 229, 244, 0.85);
+  /* position: relative; があるのでstacking contextを形成 */
+  z-index: 530000;
+  top: 0;
+  left: 0;
+}
+.mob {
+  position: absolute;
+  background-color: #f9f9f9;
+  /* position: relative; があるのでstacking contextを形成 */
+  z-index: 5;
+  top: 100px;
+  left: 100px;
+}
+
+/* 以下を入れると.mobが上にくる */
+/* これは z-index やopacity によりstacking contextが形成されるため */
+.wrapper-freezer {
+  /* z-index: 1; */
+  /* opacity: 0.99; */
+}
