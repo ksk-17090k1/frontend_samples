@@ -1,0 +1,12 @@
+div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* ここが0でもpaddingがボックスの外にはみ出して表示されてしまう */
+  /* これはborder-boxの定義と、overflowの定義が関係している （詳細はメモ参照） */
+  height: 0;
+  overflow: hidden;
+  padding: 40px;
+  background: red;
+  color: white;
+}
