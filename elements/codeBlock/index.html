@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      pre {
+        margin: 1em 0;
+        padding: 1em;
+        border-radius: 5px;
+        background: #25292f;
+        color: #fff;
+        overflow-x: auto;
+        /* モバイルでのスクロール用 */
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+    <!-- hightllight.jsを読み込み -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css"
+    />
+  </head>
+  <body>
+    <p>サンプルコードを紹介します。</p>
+    <pre><code>var foo = function (bar) {
+    return bar++;
+};
+console.log(foo(5));</code></pre>
+
+    <!-- hightllight.jsを使ってシンタックスハイライトを付与 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
