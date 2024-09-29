@@ -1,0 +1,53 @@
+<html></html>
+<head>
+<style type="text/css">
+<!--
+body {
+    margin: 0;
+    background: lightgray;
+}
+div.container {  /* フレックスコンテナ */
+    width: 500px;
+    display: flex;
+    /* 以下のalign-itemsを外すとstickyが効かなくなる */
+    align-items: flex-start;
+    background: lightgreen;
+    border-right: 4px solid lightgreen;  /* デバッグ用 */
+    border-bottom: 4px solid lightgreen;  /* デバッグ用 */
+}
+div.sidebar {  /* フレックスアイテム（サイドバー）*/
+    box-sizing: border-box;  /* 指定サイズ内でパディングを取るよう指示 */
+    flex-basis: 100px;
+    top: 0;
+    position: sticky;
+    padding: 20px;
+    background: mistyrose;
+}
+main.main {  /* フレックスアイテム（メイン）*/
+    flex-basis: 400px;
+    background: powderblue;
+}
+main.main>div.item {
+    margin: 15px 0;
+    padding: 20px;
+    background: white;
+}
+-->
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        メインページに戻る
+    </div>
+    <main class="main">
+        <div class="item">
+            ほげほげ<br/>ふがふが<br/>ほげほげ<br/>ふがふが<br/>
+            ほげほげ<br/>ふがふが<br/>ほげほげ<br/>ふがふが<br/>
+            ほげほげ<br/>ふがふが<br/>ほげほげ<br/>ふがふが<br/>
+            ほげほげ<br/>ふがふが<br/>ほげほげ<br/>ふがふが<br/>
+        </div>
+    </main>
+</div>
+</body>
+</html>

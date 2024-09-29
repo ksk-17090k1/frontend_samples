@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      label,
+      textarea {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      textarea {
+        padding: 10px;
+        max-width: 100%;
+        line-height: 1.5;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        /* この影の付け方なんかいい */
+        box-shadow: 1px 1px 1px #999;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- textareaはresizeとスクロールが最初からONになっている -->
+    <form action="" method="post">
+      <label for="story">Tell us your story:</label>
+      <!-- inputタグと同様にnameの値がキー名になる -->
+      <!-- colとrowで大きさを指定できる。あんまりレスポンシブではないので良い方法ではないかも -->
+      <textarea
+        id="story"
+        name="story"
+        rows="5"
+        cols="33"
+        placeholder="It was a dark and stormy night..."
+      ></textarea>
+    </form>
+  </body>
+</html>

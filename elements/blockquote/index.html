@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div:has(> blockquote) {
+        background-color: #ededed;
+        margin: 10px auto;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      /* 左のダブルクォーテーション */
+      blockquote p::before {
+        content: "\201C";
+      }
+
+      /* 右のダブルクオーテーション */
+      blockquote p::after {
+        content: "\201D";
+      }
+
+      blockquote + p {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <blockquote cite="https://www.huxley.net/bnw/four.html">
+        <p>
+          Words can be like X-rays, if you use them properly—they’ll go through
+          anything. You read and you’re pierced.
+        </p>
+      </blockquote>
+      <p>—Aldous Huxley, <cite>Brave New World</cite></p>
+    </div>
+  </body>
+</html>
