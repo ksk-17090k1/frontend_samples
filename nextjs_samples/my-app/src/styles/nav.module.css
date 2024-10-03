@@ -1,0 +1,101 @@
+@media (min-width: 768px) {
+  .btn {
+    display: none;
+  }
+  .list {
+    display: flex;
+    gap: 2em;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn {
+    all: unset;
+    outline: revert;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    position: relative;
+    z-index: 200;
+  }
+  .close .btn {
+    color: var(--gray-75);
+  }
+  .open .btn {
+    color: var(--white);
+  }
+
+  /* ３本のラインを中央で重ねる設定 */
+  .btn {
+    display: grid;
+    place-items: center;
+  }
+
+  .btn::before,
+  .btn::after,
+  .btn .bar {
+    grid-area: 1 / 1;
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: currentColor;
+    transition: transform 0.4s;
+  }
+
+  /* ハンバーガーメニューのアイコンを作り出す */
+  .close .btn::before {
+    transform: translateY(-8px);
+  }
+  .close .btn::after {
+    transform: translateY(8px);
+  }
+
+  /* ×印を作り出す */
+  .open .btn::before {
+    transform: rotate(45deg);
+  }
+  .open .btn::after {
+    transform: rotate(-45deg);
+  }
+  .open .btn .bar {
+    transform: scale(0);
+  }
+
+  .list {
+    position: fixed;
+    /* 右に完全にオーバーフローさせる */
+    inset: 0 -100% 0 100%;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+    transition: transform 0.4s;
+  }
+
+  .open .list {
+    transform: translateX(-100%);
+  }
+  .list {
+    display: grid;
+    gap: 40px;
+    place-content: center;
+    text-align: center;
+  }
+}
+
+@media (hover: hover) {
+  .list div:hover {
+    color: var(--accent);
+  }
+}
+
+@media (hover: none) {
+  .list a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .list div:active {
+    color: var(--accent);
+  }
+}
