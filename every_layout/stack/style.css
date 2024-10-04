@@ -1,0 +1,43 @@
+.stack {
+  /* autoを使えるようにするためFlexboxをつかう */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  /* 既存の垂直マージンを削除 */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* owl selector */
+.stack > * + * {
+  /* 日本語の場合は1.7くらいが良いかも */
+  margin-top: var(--space, 1.5rem);
+}
+
+/* 例外的に上下のスペースを広げる */
+/* --space だけを指定すればいいのがポイント */
+.stack-exception,
+.stack-exception + * {
+  --space: 5rem;
+}
+
+/* .stackの亜種 */
+/* HTMLにstyle="--space: 5rem"という風に渡してもうまくいかない。 */
+/* TODO: もう少し良い書き方あるはず */
+.stack-large > * + * {
+  --space: 3rem;
+  margin-top: var(--space, 1.5rem);
+}
+.stack-small > * + * {
+  --space: 0.5rem;
+  margin-top: var(--space, 1.5rem);
+}
+
+/* flexboxのautoはCSS Gridの1frみたいに使える */
+/* NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
+.stack > :nth-last-child(2) {
+  margin-block-end: auto;
+}
