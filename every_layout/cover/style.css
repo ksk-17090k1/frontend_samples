@@ -1,0 +1,37 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.cover {
+  --space: var(--s2);
+  display: flex;
+  flex-direction: column;
+  /* ここのmin-heightの値は適宜変更してよい */
+  min-height: 100svh;
+  padding: var(--space);
+}
+
+/* 縦のview portがめちゃ狭くなっても維持するマージンの設定 */
+.cover > * {
+  margin-top: var(--space);
+  margin-bottom: var(--space);
+}
+
+/* NOTE: 下記の h2 要素は好きなものに変えてよい！！ */
+
+.cover > :first-child:not(h2) {
+  /* first childが中央揃えされる要素でなければ、上部のmarginを削除 */
+  margin-top: 0;
+}
+
+.cover > :last-child:not(h2) {
+  /* last childが中央揃えされる要素でなければ、下部のmarginを削除 */
+  margin-bottom: 0;
+}
+
+.cover > h2 {
+  margin-top: auto;
+  margin-bottom: auto;
+}
