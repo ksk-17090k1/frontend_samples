@@ -1,5 +1,5 @@
 /* WARNING:  */
-/* coverはbox-sizing: border-boxを指定しており、同じ要素で併用すると動作がサイズがおかしくなるので */
+/* coverはbox-sizing: border-boxを指定しており、同じ要素で併用するとサイズがおかしくなるので */
 /* coverと併用するときはコンポジションしてください */
 
 .center {

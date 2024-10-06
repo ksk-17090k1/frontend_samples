@@ -1,5 +1,5 @@
 /* WARNING:  */
-/* centerはbox-sizing: content-boxを指定しており、同じ要素で併用すると動作がサイズがおかしくなるので */
+/* centerはbox-sizing: content-boxを指定しており、同じ要素で併用するとサイズがおかしくなるので */
 /* centerと併用するときはコンポジションしてください */
 
 /* reset */
