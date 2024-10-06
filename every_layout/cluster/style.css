@@ -29,7 +29,6 @@ menu {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space, 1rem);
-  /* justify-content は好きなのを選ぶ */
   justify-content: flex-start;
   align-items: center;
 }
@@ -37,7 +36,6 @@ menu {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space, 1rem);
-  /* justify-content は好きなのを選ぶ */
   justify-content: space-between;
   align-items: center;
 }
@@ -45,7 +43,6 @@ menu {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space, 1rem);
-  /* justify-content は好きなのを選ぶ */
   justify-content: center;
   align-items: center;
 }

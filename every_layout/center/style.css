@@ -1,3 +1,7 @@
+/* WARNING:  */
+/* coverはbox-sizing: border-boxを指定しており、同じ要素で併用すると動作がサイズがおかしくなるので */
+/* coverと併用するときはコンポジションしてください */
+
 .center {
   /* 最大カラム幅の公理を使いたいのでpaddingは横幅に含めない */
   box-sizing: content-box;

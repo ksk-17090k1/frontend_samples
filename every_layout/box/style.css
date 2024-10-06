@@ -26,21 +26,3 @@
   color: var(--color-light);
   background-color: var(--color-dark);
 }
-
-/* --- 以下stackなので無視でOK --- */
-
-.stack {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.stack > * {
-  /* 既存の垂直マージンを削除 */
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.stack > * + * {
-  margin-top: var(--space, 1.5rem);
-}
