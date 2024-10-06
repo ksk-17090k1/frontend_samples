@@ -1,0 +1,71 @@
+:root {
+  --ratio: 1.5;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+}
+
+.with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--s1));
+}
+
+.with-sidebar > :first-child {
+  /* サイドバーがサイドバーたりうる幅 */
+  /* NOTE: flex-basis に何も指定しなければ内在的なサイズになる！サイドバーに画像などを入れる場合はそのほうがよいかも */
+  flex-basis: 20rem;
+  /* 折り返されたときに横幅いっぱいに広げる */
+  flex-grow: 1;
+}
+
+/* --- NOTE: last-childを「サイドバーではない方」としていることに注意！！！ --- */
+.with-sidebar > :last-child {
+  /* ここを10remとかにすると絶対に折り返されてしまうので0を設定 */
+  flex-basis: 0;
+  /* サイドバーが20rem確保して、残りはサイドバーでない部分が確保する */
+  /* NOTE: 厳密にはサイドバーと1: 999の比率でgrowが起きている */
+  /* 折り返されたときはサイドバーでない部分を横幅いっぱいに広げる */
+  flex-grow: 999;
+  /* 要素の幅が等しくなったら折り返す */
+  min-width: 50%;
+}
+
+/* 以下Boxなので無視でOK */
+
+.box {
+  --border-thin: 1px;
+  /* paddingはレイアウトプリミティブの公理で四辺に同じ大きさで付ける */
+  padding: var(--s2);
+  /* borderもレイアウトプリミティブの公理で四辺につける */
+  border: var(--border-thin) solid;
+
+  /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える */
+  /* ハイコントラストモードがONになっていないときはoutlineは表示されない。 */
+  outline: var(--border-thin) transparent;
+  /* outline-offset を負の値にすることでハイコントラストモードが有効になっているときはoutlineはBoxの境界の中に移動しボーダーのように機能する */
+  outline-offset: calc(var(--border-thin) * -1);
+
+  /* light themeとdark themeの色を準備 */
+  --color-light: #fff;
+  --color-dark: #000;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}

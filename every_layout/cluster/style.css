@@ -1,0 +1,100 @@
+:root {
+  --ratio: 1.5;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+
+  /* 自由に設定する */
+  --space: var(--s1);
+}
+
+/* reset */
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cluster-start {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  /* justify-content は好きなのを選ぶ */
+  justify-content: flex-start;
+  align-items: center;
+}
+.cluster-between {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  /* justify-content は好きなのを選ぶ */
+  justify-content: space-between;
+  align-items: center;
+}
+.cluster-center {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  /* justify-content は好きなのを選ぶ */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 以下Boxなので無視でOK */
+
+.box {
+  --border-thin: 1px;
+  /* paddingはレイアウトプリミティブの公理で四辺に同じ大きさで付ける */
+  padding: var(--s2);
+  /* borderもレイアウトプリミティブの公理で四辺につける */
+  border: var(--border-thin) solid;
+
+  /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える */
+  /* ハイコントラストモードがONになっていないときはoutlineは表示されない。 */
+  outline: var(--border-thin) transparent;
+  /* outline-offset を負の値にすることでハイコントラストモードが有効になっているときはoutlineはBoxの境界の中に移動しボーダーのように機能する */
+  outline-offset: calc(var(--border-thin) * -1);
+
+  /* light themeとdark themeの色を準備 */
+  --color-light: #fff;
+  --color-dark: #000;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+/* --- 以下stackなので無視でOK --- */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  /* 既存の垂直マージンを削除 */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--space, 1.5rem);
+}

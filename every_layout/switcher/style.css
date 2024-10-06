@@ -1,0 +1,6 @@
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--s1));
+  --threshold: 30rem;
+}
