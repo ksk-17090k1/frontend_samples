@@ -1,0 +1,70 @@
+.reel {
+  --space: 1rem;
+  --color-light: #fff;
+  --color-dark: #000;
+  /* リールの高さ */
+  --reel-height: auto;
+  /* リールのアイテムの横幅 */
+  --item-width: 25ch;
+  display: flex;
+  gap: var(--space);
+  height: var(--reel-height);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* --- スクロールバーの設定 --- */
+/* モダンブラウザの設定方法 （Every Layoutの本ではWebkitを使っているのでコメントアウトしている） */
+.reel {
+  /* 1番目がつまみ、2番目がトラック */
+  /* scrollbar-color: var(--color-light) var(--color-dark); */
+  /* scrollbar-width: thin; */
+}
+/* レガシーブラウザの設定方法 */
+/* NOTE: webkitによるスクロールバーの設定はレガシーなので削除してもいいかも */
+.reel::-webkit-scrollbar {
+  /* ここのheightの値を変数にしてもよい（liner-gradientのところも影響を受ける） */
+  height: 1rem;
+}
+.reel::-webkit-scrollbar-track {
+  background-color: var(--color-dark);
+}
+.reel::-webkit-scrollbar-thumb {
+  background-color: var(--color-dark);
+  /* 線形グラデーションによって黒いバーの中に白いツマミを挿入する */
+  background-image: linear-gradient(
+    var(--color-dark) 0,
+    var(--color-dark) 0.25rem,
+    var(--color-light) 0.25rem,
+    var(--color-light) 0.75rem,
+    var(--color-dark) 0.75rem
+  );
+}
+
+.reel > * {
+  /* デフォルトでは flex-shrink: 1が適用されているためshrinkを解除する */
+  flex: 0 0 var(--item-width);
+}
+
+/* 画像だけアスペクト比を固定してリサイズするために、flex-basisをリセット */
+/* NOTE: ここが .reel img になっていないのは理由がある */
+/* リールの直の子要素が画像の場合はimgのレイアウト操作が必要だが、imgがなにかの子要素であれば必要ない。 */
+.reel > img {
+  height: 100%;
+  flex-basis: auto;
+  width: auto;
+}
+
+/* スクロールバーがある場合のみ適用 */
+/* NOTE: overflowingクラスはJavaScriptによって動的に付与される */
+.reel.overflowing:not(.no-bar) {
+  padding-bottom: var(--space);
+}
+
+.reel.no-bar {
+  scrollbar-width: none;
+}
+
+.reel.no-bar::-webkit-scrollbar {
+  display: none;
+}

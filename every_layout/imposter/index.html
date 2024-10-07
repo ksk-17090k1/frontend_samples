@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../box/style.css" />
+    <link rel="stylesheet" href="../stack/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="stack">
+      <section class="box">
+        <div style="position: relative; background-color: antiquewhite">
+          <p>スタティックなコンテンツ</p>
+          <div class="imposter" style="background-color: aqua">
+            <p>重ね合わされるコンテンツ</p>
+          </div>
+        </div>
+      </section>
+      <section class="box">
+        <div
+          style="
+            position: relative;
+            background-color: antiquewhite;
+            height: 3rem;
+          "
+        >
+          <p>スタティックなコンテンツ</p>
+          <div class="imposter contain" style="background-color: aqua">
+            <p>重ね合わされるコンテンツ(スクロール可)</p>
+            <p>重ね合わされるコンテンツ(スクロール可)</p>
+            <p>重ね合わされるコンテンツ(スクロール可)</p>
+            <p>重ね合わされるコンテンツ(スクロール可)</p>
+          </div>
+        </div>
+      </section>
+      <section class="box">
+        <div style="position: relative; background-color: antiquewhite">
+          <p>スタティックなコンテンツ</p>
+          <div
+            class="imposter"
+            style="background-color: aqua; --positioning: fixed"
+          >
+            <p>重ね合わされるコンテンツ</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
