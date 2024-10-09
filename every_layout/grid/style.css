@@ -1,11 +1,14 @@
 .grid {
   --minimum: 20ch;
+
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
     minmax(min(var(--minimum), 100%), 1fr)
   );
+
   /* こう書くとview portが--minimum以下のときグリッドコンテナがオーバーフローする */
+
   /* grid-template-columns: repeat(auto-fit, minmax(var(--minimum), 1fr)); */
   gap: 1rem;
 }

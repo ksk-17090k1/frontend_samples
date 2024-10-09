@@ -1,32 +1,35 @@
 /* 大文字の高さに合わせたアイコン */
 .icon {
-  /* emやcapで指定することによりfont-sizeと連動させる！！ */
   /* capをサポートしていない古いブラウザに備えてemでも指定 */
+
+  /* emやcapで指定することによりfont-sizeと連動させる！！ */
+
   /* 大文字の高さはだいたい0.75emくらいになる */
-  height: 0.75em;
   width: 0.75em;
-  height: 1cap;
   width: 1cap;
+  height: 0.75em;
+  height: 1cap;
 }
 
 /* 小文字の高さに合わせたアイコン */
 .icon-lower {
-  height: 1ex;
   width: 1ex;
+  height: 1ex;
 }
 
 /* アイコン単体で使うときはこのクラスは不要 */
 .with-icon {
   /* スペースを削除するためにinline-flexを指定 */
   display: inline-flex;
-  align-items: baseline;
   gap: var(--space, 0.25em);
+  align-items: baseline;
 }
 
 /* 以下でアイコンのサイズも調整可能 */
 .small {
   font-size: 0.75em;
 }
+
 .big {
   font-size: 1.25em;
 }
