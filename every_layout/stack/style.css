@@ -25,7 +25,7 @@
 }
 
 /* .stackの亜種 */
-/* HTMLにstyle="--space: 5rem"という風に渡してもうまくいかない。 */
+/* 実際にスタイルが効くのは * 要素なので、stack-largeクラスのある要素にstyle="--space: 5rem"という風に渡してもうまくいかない。 */
 /* TODO: もう少し良い書き方あるはず */
 .stack-large > * + * {
   --space: 3rem;
