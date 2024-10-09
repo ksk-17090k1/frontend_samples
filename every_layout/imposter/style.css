@@ -27,16 +27,18 @@ pre {
 .imposter.contain {
   /* 単位を含めないとcalcが無効になる */
   --margin: 0px;
-  overflow: auto;
+
   /* 両端のマージンを考慮してサイズを決定 */
   max-width: calc(100% - (var(--margin) * 2));
   max-height: calc(100% - (var(--margin) * 2));
+  overflow: auto;
 }
 
 /* ただのスクロールバーの設定なので無視でOK */
 html {
   --color-light: #fff;
   --color-dark: #000;
+
   /* 1番目がつまみ、2番目がトラック */
   scrollbar-color: var(--color-dark) var(--color-light);
   scrollbar-width: thin;

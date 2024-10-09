@@ -18,6 +18,7 @@
 }
 
 /* 例外的に上下のスペースを広げる */
+
 /* --space だけを指定すればいいのがポイント */
 .stack-exception,
 .stack-exception + * {
@@ -25,18 +26,24 @@
 }
 
 /* .stackの亜種 */
+
 /* 実際にスタイルが効くのは * 要素なので、stack-largeクラスのある要素にstyle="--space: 5rem"という風に渡してもうまくいかない。 */
+
 /* TODO: もう少し良い書き方あるはず */
 .stack-large > * + * {
   --space: 3rem;
+
   margin-top: var(--space, 1.5rem);
 }
+
 .stack-small > * + * {
   --space: 0.5rem;
+
   margin-top: var(--space, 1.5rem);
 }
 
 /* flexboxのautoはCSS Gridの1frみたいに使える */
+
 /* NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
 .stack > :nth-last-child(2) {
   margin-block-end: auto;

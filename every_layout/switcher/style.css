@@ -17,21 +17,28 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--gutter, var(--s1));
+
   /* コンテナのサイズのしきい値（コンテナクエリ的な） */
   --threshold: 30rem;
 }
 
 .switcher > * {
   flex-grow: 1;
+
   /* calcの結果は、しきい値よりコンテナが大きいと0, 小さいととても大きな正の値になる */
+
   /* NOTE: flex-basisでは負の値は無視され0になる */
+
   /* flex-basisが0だとflex-growにより各要素が均等に引き伸ばされる */
+
   /* flex-basisがとても大きい値だと自動的に各要素ごとに折り返しが入る */
   flex-basis: calc((var(--threshold) - 100%) * 999);
 }
 
 /* 5つ以上の子要素があれば垂直方向の配置に切り替え */
+
 /* NOTE: ~は兄弟要素のセレクタ */
+
 /* NOTE: 子要素が4つ以下だと5番目の要素が存在しないのでこのCSSは無効になる */
 .switcher > :nth-last-child(n + 5),
 .switcher > :nth-last-child(n + 5) ~ * {
