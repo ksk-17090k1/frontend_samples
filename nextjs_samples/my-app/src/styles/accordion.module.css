@@ -9,20 +9,20 @@
 
 .heading button {
   all: unset;
-  outline: revert;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
   box-sizing: border-box;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
   width: 100%;
   padding: 1em;
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
+  cursor: pointer;
+  outline: revert;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .icon {
-  color: var(--gray-25);
   font-size: 1.25em;
+  color: var(--gray-25);
   transition: transform 0.5s;
 }
 
@@ -31,13 +31,14 @@
 }
 
 .text {
+  height: 0;
   overflow: hidden;
-  height: 0px;
   transition: height 0.5s;
 }
 
 .open .text {
   --text-height: attr(data-text-height, 0px);
+
   height: var(--text-height);
 }
 

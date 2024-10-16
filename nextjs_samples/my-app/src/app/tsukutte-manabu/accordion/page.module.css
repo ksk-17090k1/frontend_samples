@@ -1,6 +1,6 @@
 .area {
-  background-color: antiquewhite;
-  margin: 20px auto;
   width: 40%;
+  margin: 20px auto;
+  background-color: antiquewhite;
   border-radius: 10px;
 }

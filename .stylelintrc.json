@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
   "plugins": ["stylelint-declaration-block-no-ignored-properties"],
   "rules": {
-    "plugin/declaration-block-no-ignored-properties": true
+    "plugin/declaration-block-no-ignored-properties": true,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9-]+$"
   }
 }
