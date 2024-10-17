@@ -1,0 +1,108 @@
+/* refs: https://zenn.dev/no4_dev/articles/8d911ace9f7449 
+         https://zenn.dev/crayfisher_zari/articles/8453a78fba5803 */
+
+* {
+  font-family: sans-serif;
+}
+
+:root {
+  --border: 1px solid #333;
+  --table-head-color: #ddd;
+  --table-body-color: #f9f9f9;
+  --table-body-hover-color: #ccc;
+  --table-gap: 0.5em;
+}
+
+table.grid-table {
+  /* tableのgrid 
+     NOTE: tabl要素のdisplayのデフォルト値はtable */
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+
+  /* まずtheadとtbodyでsubgridを生成し、またその内側のtrでsubgridを生成する */
+  tr,
+  tbody,
+  thead,
+  tfoot {
+    /* 親のgirdをひたすら引き継ぐ設定になっている */
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+  }
+
+  th,
+  td {
+    /* th, tdのdisplayのデフォルトはtable-cellなので、CSS Gridとのかみ合わせでバグが起きないようにblockに変更する */
+    display: block;
+    padding: 8px;
+  }
+
+  /* 横方向のセル結合
+     NOTE: rowspanを作るには暗黙的ではなく明示的なgridを定義する必要がある。 */
+  th.colspan2,
+  td.colspan2 {
+    grid-column: span 2;
+  }
+
+  /* 1つのセルもトラックが1つだけのgridを生成する */
+  td {
+    display: grid;
+    align-items: center;
+    min-height: 2.5em;
+  }
+}
+
+table.grid-table-color {
+  th {
+    background-color: var(--table-head-color);
+  }
+
+  tbody {
+    td {
+      background-color: var(--table-body-color);
+      transition: background-color 0.3s ease-out;
+    }
+
+    td:hover {
+      background-color: var(--table-body-hover-color);
+    }
+  }
+}
+
+table.grid-table-border {
+  /* border-radiusがbackground-colorに上書きされないようにする */
+  overflow: clip;
+  border: var(--border);
+  border-radius: 8px;
+
+  tbody {
+    tr:not(:first-child) {
+      border-top: var(--border);
+    }
+  }
+}
+
+table.grid-table-gap {
+  gap: var(--table-gap);
+
+  tbody,
+  thead,
+  tfoot {
+    gap: var(--table-gap);
+  }
+}
+
+table.grid-table-left-sticky {
+  position: relative;
+  overflow: auto;
+
+  th:first-child,
+  td:first-child {
+    position: sticky;
+    left: 0;
+  }
+
+  td {
+    min-width: max-content;
+  }
+}
