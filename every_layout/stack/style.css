@@ -1,50 +1,57 @@
 .stack {
+  /* modular scale */
+  --stack-ratio: 1.5;
+  --stack-s-5: calc(var(--stack-s-4) / var(--stack-ratio));
+  --stack-s-4: calc(var(--stack-s-3) / var(--stack-ratio));
+  --stack-s-3: calc(var(--stack-s-2) / var(--stack-ratio));
+  --stack-s-2: calc(var(--stack-s-1) / var(--stack-ratio));
+  --stack-s-1: calc(var(--stack-s0) / var(--stack-ratio));
+
+  /* 普通のモジュラースケールは1.0remだが、stackはline-height基準の1.5remが良いらしいのでそうする
+   * 日本語の場合は1.7くらいが良いかも */
+  --stack-s0: 1.5rem;
+  --stack-s1: calc(var(--stack-s0) * var(--stack-ratio));
+  --stack-s2: calc(var(--stack-s1) * var(--stack-ratio));
+  --stack-s3: calc(var(--stack-s2) * var(--stack-ratio));
+  --stack-s4: calc(var(--stack-s3) * var(--stack-ratio));
+  --stack-s5: calc(var(--stack-s4) * var(--stack-ratio));
+
   /* autoを使えるようにするためFlexboxをつかう */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
 
-.stack > * {
-  /* 既存の垂直マージンを削除 */
-  margin-top: 0;
-  margin-bottom: 0;
-}
+  > * {
+    /* 既存の垂直マージンを削除 */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-/* owl selector */
-.stack > * + * {
-  /* 日本語の場合は1.7くらいが良いかも */
-  margin-top: var(--space, 1.5rem);
-}
+  /* owl selector */
+  > * + * {
+    margin-top: var(--space, var(--stack-s0));
+  }
 
-/* 例外的に上下のスペースを広げる */
+  /* 例外的に上下のスペースを広げる 
+   * --space だけを指定すればいいのがポイント */
+  .exception,
+  .exception + * {
+    --space: var(--stack-s3);
+  }
 
-/* --space だけを指定すればいいのがポイント */
-.stack-exception,
-.stack-exception + * {
-  --space: 5rem;
+  /* (以下はコピペする際は消してもOK)
+   * flexboxのautoはCSS Gridの1frみたいに使える
+   * NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
+  > :nth-last-child(2) {
+    margin-block-end: auto;
+  }
 }
 
 /* .stackの亜種 */
-
-/* 実際にスタイルが効くのは * 要素なので、stack-largeクラスのある要素にstyle="--space: 5rem"という風に渡してもうまくいかない。 */
-
-/* TODO: もう少し良い書き方あるはず */
-.stack-large > * + * {
-  --space: 3rem;
-
-  margin-top: var(--space, 1.5rem);
+.stack.small > * + * {
+  --space: var(--stack-s-2);
 }
 
-.stack-small > * + * {
-  --space: 0.5rem;
-
-  margin-top: var(--space, 1.5rem);
-}
-
-/* flexboxのautoはCSS Gridの1frみたいに使える */
-
-/* NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
-.stack > :nth-last-child(2) {
-  margin-block-end: auto;
+.stack.large > * + * {
+  --space: var(--stack-s1);
 }

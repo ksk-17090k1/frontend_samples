@@ -11,35 +11,10 @@
   --s3: calc(var(--s2) * var(--ratio));
   --s4: calc(var(--s3) * var(--ratio));
   --s5: calc(var(--s4) * var(--ratio));
-
-  /* 自由に設定する */
-  --space: var(--s1);
+  --font-size: var(--s0);
 }
 
-/* reset */
-ol,
-ul,
-menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.cluster {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space, 1rem);
-  align-items: center;
-}
-
-.cluster.start {
-  justify-content: flex-start;
-}
-
-.cluster.center {
-  justify-content: center;
-}
-
-.cluster.between {
-  justify-content: space-between;
+.font {
+  font-size: var(--font-size);
+  background-color: antiquewhite;
 }

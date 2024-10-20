@@ -21,16 +21,13 @@
 .reel-not-use-webkit {
   --dummy: 0;
 
-  /* 1番目がつまみ、2番目がトラック */
-
-  /* scrollbar-color: var(--color-light) var(--color-dark); */
-
-  /* scrollbar-width: thin; */
+  /* 1番目がつまみ、2番目がトラック
+  scrollbar-color: var(--color-light) var(--color-dark);
+  scrollbar-width: thin; */
 }
 
-/* レガシーブラウザの設定方法 */
-
-/* NOTE: webkitによるスクロールバーの設定はレガシーなので削除してもいいかも */
+/* レガシーブラウザの設定方法
+   NOTE: webkitによるスクロールバーの設定はレガシーなので削除してもいいかも */
 .reel::-webkit-scrollbar {
   /* ここのheightの値を変数にしてもよい（liner-gradientのところも影響を受ける） */
   height: 1rem;
@@ -58,20 +55,17 @@
   flex: 0 0 var(--item-width);
 }
 
-/* 画像だけアスペクト比を固定してリサイズするために、flex-basisをリセット */
-
-/* NOTE: ここが .reel img になっていないのは理由がある */
-
-/* リールの直の子要素が画像の場合はimgのレイアウト操作が必要だが、imgがなにかの子要素であれば必要ない。 */
+/* 画像だけアスペクト比を固定してリサイズするために、flex-basisをリセット
+   NOTE: ここが .reel img になっていないのは理由がある
+         リールの直の子要素が画像の場合はimgのレイアウト操作が必要だが、imgがなにかの子要素であれば必要ない。 */
 .reel > img {
   flex-basis: auto;
   width: auto;
   height: 100%;
 }
 
-/* スクロールバーがある場合のみ適用 */
-
-/* NOTE: overflowingクラスはJavaScriptによって動的に付与される */
+/* スクロールバーがある場合のみ適用
+   NOTE: overflowingクラスはJavaScriptによって動的に付与される */
 .reel.overflowing:not(.no-bar) {
   padding-bottom: var(--space);
 }

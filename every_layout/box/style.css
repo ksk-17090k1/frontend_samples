@@ -1,17 +1,17 @@
 .box {
   --border-thin: 1px;
+  --padding: var(--s1);
 
   /* paddingはレイアウトプリミティブの公理で四辺に同じ大きさで付ける */
-  padding: var(--s2);
+  padding: var(--padding);
   color: var(--color-dark);
   background-color: var(--color-light);
 
   /* borderもレイアウトプリミティブの公理で四辺につける */
   border: var(--border-thin) solid;
 
-  /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える */
-
-  /* ハイコントラストモードがONになっていないときはoutlineは表示されない。 */
+  /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える
+     ハイコントラストモードがONになっていないときはoutlineはスタイルに影響しない */
   outline: var(--border-thin) transparent;
 
   /* outline-offset を負の値にすることでハイコントラストモードが有効になっているときはoutlineはBoxの境界の中に移動しボーダーのように機能する */

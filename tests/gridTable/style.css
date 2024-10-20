@@ -9,7 +9,11 @@
   --border: 1px solid #333;
   --table-head-color: #ddd;
   --table-body-color: #f9f9f9;
-  --table-body-hover-color: #ccc;
+  --table-body-hover-color: color-mix(
+    in srgb,
+    var(--table-body-color),
+    black 10%
+  );
   --table-gap: 0.5em;
 }
 
@@ -63,8 +67,16 @@ table.grid-table {
       transition: background-color 0.3s ease-out;
     }
 
-    td:hover {
-      background-color: var(--table-body-hover-color);
+    @media (hover: hover) {
+      td:hover {
+        background-color: var(--table-body-hover-color);
+      }
+    }
+
+    @media (hover: none) {
+      td:active {
+        background-color: var(--table-body-hover-color);
+      }
     }
   }
 }

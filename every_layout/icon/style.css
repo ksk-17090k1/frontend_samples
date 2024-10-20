@@ -1,3 +1,5 @@
+/* NOTE: Every Layoutの考え方では、インライン要素はem, ボックス要素はremを使うので、このレイアウトはemを使っている */
+
 /* 大文字の高さに合わせたアイコン */
 .icon {
   /* capをサポートしていない古いブラウザに備えてemでも指定 */
@@ -26,10 +28,10 @@
 }
 
 /* 以下でアイコンのサイズも調整可能 */
-.small {
+.with-icon.small {
   font-size: 0.75em;
 }
 
-.big {
+.with-icon.big {
   font-size: 1.25em;
 }
