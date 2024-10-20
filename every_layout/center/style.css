@@ -1,8 +1,6 @@
-/* WARNING:  */
-
-/* coverはbox-sizing: border-boxを指定しており、同じ要素で併用するとサイズがおかしくなるので */
-
-/* coverと併用するときはコンポジションしてください */
+/* WARNING: 
+   coverはbox-sizing: border-boxを指定しており、同じ要素で併用するとサイズがおかしくなるので
+   coverと併用するときはコンポジションしてください */
 
 .center {
   /* 最大カラム幅の公理を使いたいのでpaddingは横幅に含めない */
@@ -13,16 +11,14 @@
   flex-direction: column;
   align-items: center;
 
-  /* English */
-
-  /* max-width: 60ch; */
-
-  /* Japanese */
+  /* 英語の場合は max-width: 60ch; が推奨 */
   max-width: 30em;
-  padding-right: var(--s1);
 
   /* 最低限のpaddingを指定 */
+  padding-right: var(--s1);
   padding-left: var(--s1);
+
+  /* 水平方向の中央揃え */
   margin-right: auto;
   margin-left: auto;
 }

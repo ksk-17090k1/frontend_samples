@@ -1,12 +1,8 @@
-/* NOTE: Every Layoutの考え方では、インライン要素はem, ボックス要素はremを使うので、このレイアウトはemを使っている */
-
 /* 大文字の高さに合わせたアイコン */
 .icon {
-  /* capをサポートしていない古いブラウザに備えてemでも指定 */
-
-  /* emやcapで指定することによりfont-sizeと連動させる！！ */
-
-  /* 大文字の高さはだいたい0.75emくらいになる */
+  /* capをサポートしていない古いブラウザに備えてemでも指定 
+     emやcapで指定することによりfont-sizeと連動させる！！
+     大文字の高さはだいたい0.75emくらいになる */
   width: 0.75em;
   width: 1cap;
   height: 0.75em;
@@ -21,13 +17,13 @@
 
 /* アイコン単体で使うときはこのクラスは不要 */
 .with-icon {
-  /* スペースを削除するためにinline-flexを指定 */
+  /* 自然発生するスペースを削除するためにinline-flexを指定 */
   display: inline-flex;
   gap: var(--space, 0.25em);
   align-items: baseline;
 }
 
-/* 以下でアイコンのサイズも調整可能 */
+/* 以下でアイコンとテキストのサイズも調整可能 */
 .with-icon.small {
   font-size: 0.75em;
 }
