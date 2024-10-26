@@ -14,7 +14,7 @@
   --s5: calc(var(--s4) * var(--ratio));
 }
 
-/* 以下tailwindのreset cssを貼り付け */
+/* 以下tailwindのreset cssを一部修正して貼り付け */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -25,7 +25,7 @@
 ::before,
 ::after {
   box-sizing: border-box; /* 1 */
-  border-color: theme("borderColor.DEFAULT", currentcolor); /* 2 */
+  border-color: currentcolor; /* 2 */
   border-style: solid; /* 2 */
   border-width: 0; /* 2 */
 }
@@ -47,27 +47,11 @@
 
 html,
 :host {
-  font-family: theme(
-    "fontFamily.sans",
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji"
-  ); /* 4 */
+  font-family: "fontFamily.sans", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
 
-  font-variation-settings: theme(
-    "fontFamily.sans[1].fontVariationSettings",
-    normal
-  ); /* 6 */
-
-  font-feature-settings: theme(
-    "fontFamily.sans[1].fontFeatureSettings",
-    normal
-  ); /* 5 */
-
+  font-variation-settings: "fontFamily.sans[1].fontVariationSettings", normal; /* 6 */
+  font-feature-settings: "fontFamily.sans[1].fontFeatureSettings", normal; /* 5 */
   line-height: 1.5; /* 1 */ /* 3 */
   tab-size: 4; /* 3 */
   text-size-adjust: 100%; /* 2 */
@@ -147,28 +131,12 @@ code,
 kbd,
 samp,
 pre {
-  font-family: theme(
-    "fontFamily.mono",
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace
-  ); /* 1 */
+  font-family: "fontFamily.mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
 
   font-size: 1em; /* 4 */
-  font-variation-settings: theme(
-    "fontFamily.mono[1].fontVariationSettings",
-    normal
-  ); /* 3 */
-
-  font-feature-settings: theme(
-    "fontFamily.mono[1].fontFeatureSettings",
-    normal
-  ); /* 2 */
+  font-variation-settings: "fontFamily.mono[1].fontVariationSettings", normal; /* 3 */
+  font-feature-settings: "fontFamily.mono[1].fontFeatureSettings", normal; /* 2 */
 }
 
 /*
@@ -385,7 +353,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: theme("colors.gray.400", #9ca3af); /* 2 */
+  color: "colors.gray.400", #9ca3af; /* 2 */
   opacity: 1; /* 1 */
 }
 
@@ -420,7 +388,6 @@ iframe,
 embed,
 object {
   display: block; /* 1 */
-  vertical-align: middle; /* 2 */
 }
 
 /*

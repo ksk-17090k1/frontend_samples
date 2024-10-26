@@ -1,4 +1,4 @@
-// NOTE: 素直にReactで書いたほうがよい。
+// Reactで書き直しもしている。が素のJavaScriptのスニペットになると思って残している
 
 const dropArea = document.getElementById("dropArea");
 const fileInput = document.getElementById("uploadFile");

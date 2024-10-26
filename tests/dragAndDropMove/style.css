@@ -1,0 +1,24 @@
+body {
+  text-align: center;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border: 1px solid gray;
+}
+
+.box.drag {
+  background-color: skyblue;
+}
+
+.box.dragging {
+  background-color: skyblue;
+  opacity: 0.5;
+}
