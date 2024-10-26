@@ -8,7 +8,7 @@
   background-color: var(--color-light);
 
   /* borderもレイアウトプリミティブの公理で四辺につける */
-  border: var(--border-thin) solid;
+  border: var(--border-thin) solid gray;
 
   /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える
      ハイコントラストモードがONになっていないときはoutlineはスタイルに影響しない */

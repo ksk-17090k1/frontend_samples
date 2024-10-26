@@ -13,8 +13,6 @@ export const FileUpload = () => {
 
   // NOTE: React.DragEvent のデフォルトの挙動として、ドラッグされたファイルをブラウザで開く挙動があるため
   //       それを防ぐために preventDefault() を呼び出す
-
-  // NOTE: 他には dragenter イベントもあるが、dragoverだけでいけそうなので使っていない。
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragOver(true);

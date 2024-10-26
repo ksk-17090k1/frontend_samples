@@ -1,10 +1,10 @@
 // Reactで書き直しもしている
 
-// drag対象
+// drag対象に対して dragstart イベントをlistenする
 document.querySelector(".box.drag").draggable = true;
 document.querySelector(".box.drag").addEventListener("dragstart", onDragStart);
 
-// dropされる側
+// dropされる側に対して4つのイベントをlistenする
 document.querySelectorAll(".box.drop").forEach((element) => {
   element.addEventListener("drop", onDrop);
   element.addEventListener("dragover", onDragover);
@@ -19,7 +19,7 @@ const onDragStart = (event) => {
 const onDrop = (event) => {
   event.currentTarget.classList.remove("dragging");
   const boxs = [...document.querySelectorAll(".box")];
-  // NOTE: 正直ここの実装はかなり微妙なので改善したほうがいい
+  // NOTE: 正直ここの実装はかなり微妙なので改善したほうがいい。Reactならもっとよいロジックを簡単に書ける
   // 一番左の要素なら左に、それ以外なら右に挿入する
   if (boxs.indexOf(event.currentTarget) === 0) {
     event.currentTarget.before(

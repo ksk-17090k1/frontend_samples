@@ -12,6 +12,9 @@ export const Samples = () => {
       <div>
         <Link href="/samples/file-upload">File Upload</Link>
       </div>
+      <div>
+        <Link href="/samples/dnd-move">Drag and drop Move</Link>
+      </div>
     </>
   );
 };
