@@ -8,7 +8,7 @@
   --stack-s-1: calc(var(--stack-s0) / var(--stack-ratio));
 
   /* 普通のモジュラースケールは1.0remだが、stackはline-height基準の1.5remが良いらしいのでそうする
-   * 日本語の場合は1.7くらいが良いかも */
+     * 日本語の場合は1.7くらいが良いかも */
   --stack-s0: 1.5rem;
   --stack-s1: calc(var(--stack-s0) * var(--stack-ratio));
   --stack-s2: calc(var(--stack-s1) * var(--stack-ratio));
@@ -33,15 +33,15 @@
   }
 
   /* 例外的に上下のスペースを広げる 
-   * --space だけを指定すればいいのがポイント */
+     * --space だけを指定すればいいのがポイント */
   .exception,
   .exception + * {
     --space: var(--stack-s3);
   }
 
   /* (以下はコピペする際は消してもOK)
-   * flexboxのautoはCSS Gridの1frみたいに使える
-   * NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
+     * flexboxのautoはCSS Gridの1frみたいに使える
+     * NOTE: :nth-child()は先頭から、:nth-last-child()は後ろから */
   & > :nth-last-child(2) {
     margin-block-end: auto;
   }

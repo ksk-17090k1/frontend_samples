@@ -10,13 +10,13 @@
 }
 
 /* 小文字の高さに合わせたアイコン */
-.icon-lower {
+.iconLower {
   width: 1ex;
   height: 1ex;
 }
 
 /* アイコン単体で使うときはこのクラスは不要 */
-.with-icon {
+.withIcon {
   /* 自然発生するスペースを削除するためにinline-flexを指定 */
   display: inline-flex;
   gap: var(--space, 0.25em);
@@ -24,10 +24,10 @@
 }
 
 /* 以下でアイコンとテキストのサイズも調整可能 */
-.with-icon.small {
+.withIcon.small {
   font-size: 0.75em;
 }
 
-.with-icon.big {
+.withIcon.big {
   font-size: 1.25em;
 }

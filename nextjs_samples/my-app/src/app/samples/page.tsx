@@ -9,6 +9,9 @@ export const Samples = () => {
       <div>
         <Link href="/samples/local-storage">Local Storage</Link>
       </div>
+      <div>
+        <Link href="/samples/file-upload">File Upload</Link>
+      </div>
     </>
   );
 };

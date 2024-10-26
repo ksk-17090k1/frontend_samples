@@ -1,4 +1,4 @@
-.with-sidebar {
+.withSidebar {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gutter, var(--s1));

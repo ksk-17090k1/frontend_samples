@@ -18,7 +18,7 @@
 /* --- スクロールバーの設定 --- */
 
 /* モダンブラウザの設定方法 （Every Layoutの本ではWebkitを使っているのでコメントアウトしている） */
-.reel-not-use-webkit {
+.reelNotUseWebkit {
   --dummy: 0;
 
   /* 1番目がつまみ、2番目がトラック
@@ -66,14 +66,14 @@
 
 /* スクロールバーがある場合のみ適用
    NOTE: overflowingクラスはJavaScriptによって動的に付与される */
-.reel.overflowing:not(.no-bar) {
+.reel.overflowing:not(.noBar) {
   padding-bottom: var(--space);
 }
 
-.reel.no-bar {
+.reel.noBar {
   scrollbar-width: none;
 }
 
-.reel.no-bar::-webkit-scrollbar {
+.reel.noBar::-webkit-scrollbar {
   display: none;
 }
