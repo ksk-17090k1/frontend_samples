@@ -1,0 +1,22 @@
+/* reset */
+p {
+  margin: 0;
+}
+
+.display-none {
+  display: none;
+}
+
+.box.droparea {
+  border: 2px dashed #494949;
+  transition: all 0.25s cubic-bezier(0.21, 0.51, 0.51, 1);
+}
+
+.box.droparea.dragover {
+  background: rgb(22 165 191 / 60%);
+  border: 2px solid #16a5bf;
+}
+
+.box.file-upload-button {
+  border-radius: 4px;
+}

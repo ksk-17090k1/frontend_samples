@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../every_layout/modular_scale.css" />
+    <link rel="stylesheet" href="../../every_layout/box/style.css" />
+    <link rel="stylesheet" href="../../every_layout/center/style.css" />
+    <link rel="stylesheet" href="../../every_layout/cover/style.css" />
+    <link rel="stylesheet" href="../../every_layout/stack/style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box droparea" id="dropArea">
+      <div class="cover">
+        <div class="cover-target center stack">
+          <div class="center">
+            <p>ここにファイルをドロップしてください</p>
+            <p>または</p>
+          </div>
+          <!-- label要素の力でdiv要素をクリックしてもinputをクリックしたことになる！ -->
+          <label>
+            <!-- 拡張子を制限したい場合はacceptを指定する -->
+            <input
+              type="file"
+              name="uploadFile"
+              id="uploadFile"
+              class="display-none"
+            />
+            <div class="box invert file-upload-button">ファイルを選択する</div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

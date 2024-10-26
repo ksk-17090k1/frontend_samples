@@ -8,6 +8,7 @@ export default function Home() {
         <Link href={"./tsukutte-manabu/accordion"}>Accordion</Link>
         <Link href={"./tsukutte-manabu/menu-bar"}>Menu-Bar</Link>
         <Link href={"./zustand"}>Zustand</Link>
+        <Link href={"./samples"}>samples</Link>
       </main>
       <footer className={styles.footer}></footer>
     </div>
