@@ -1,5 +1,6 @@
 import "./App.css";
 import ClsxSample from "./components/ClsxSample";
+import { CssMChadcnBadge } from "./components/CssMChadcnBadge";
 import { CvaSample } from "./components/CvaSample";
 import { Badge } from "./components/ui/badge";
 
@@ -16,7 +17,12 @@ function App() {
         </CvaSample>
       </div>
       <div>
-        <Badge>Budge</Badge>
+        <Badge variant="default">Chadcn/ui</Badge>
+      </div>
+      <div>
+        <CssMChadcnBadge variant="default">
+          Chadcn/ui extended by CSS Module
+        </CssMChadcnBadge>
       </div>
     </>
   );
