@@ -28,6 +28,7 @@ const hashStorage: StateStorage = {
 const storageOptions = {
   name: "count-hash-storage",
   // コールバック関数の返り値はStateStorage型
+  // (optional) by default the 'localStorage' is used
   storage: createJSONStorage(() => hashStorage),
 };
 

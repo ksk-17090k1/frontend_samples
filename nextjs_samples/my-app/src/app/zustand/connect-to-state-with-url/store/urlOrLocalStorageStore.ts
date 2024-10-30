@@ -45,6 +45,7 @@ export type LocalAndUrlStore = {
 const storageOptions = {
   name: "fishAndBearsStore",
   // コールバック関数の返り値はStateStorage型
+  // (optional) by default the 'localStorage' is used
   storage: createJSONStorage<LocalAndUrlStore>(() => persistentStorage),
 };
 
