@@ -2,6 +2,7 @@ import "./App.css";
 import ClsxSample from "./components/ClsxSample";
 import { CssMChadcnBadge } from "./components/CssMChadcnBadge";
 import { CvaSample } from "./components/CvaSample";
+import { ErrorBoundaryBasic } from "./components/ErrorBoundaryBasic";
 import { TSTableBasic } from "./components/TSTableBasic";
 import { TSTableHeaderGroups } from "./components/TSTableHeaderGroups";
 import { Badge } from "./components/ui/badge";
@@ -26,8 +27,9 @@ function App() {
           Chadcn/ui extended by CSS Module
         </CssMChadcnBadge>
       </div>
-      <div><TSTableBasic /></div>
-      <div><TSTableHeaderGroups /></div>
+      {/* <div><TSTableBasic /></div> */}
+      {/* <div><TSTableHeaderGroups /></div> */}
+      <ErrorBoundaryBasic />
     </>
   );
 }

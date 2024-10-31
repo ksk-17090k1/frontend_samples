@@ -1,16 +1,14 @@
 import { create } from "zustand";
 import { persist, StateStorage, createJSONStorage } from "zustand/middleware";
 
-const getUrlSearch = () => {
-  // slice(1) で?以降を取得
-  return window.location.search.slice(1);
-};
+// slice(1) で?以降を取得
+const getQueryParams = () => window.location.search.slice(1);
 
 const persistentStorage: StateStorage = {
   getItem: (key): string => {
     // Check URL first
-    if (getUrlSearch()) {
-      const searchParams = new URLSearchParams(getUrlSearch());
+    if (getQueryParams()) {
+      const searchParams = new URLSearchParams(getQueryParams());
       const storedValue = searchParams.get(key);
       return JSON.parse(storedValue as string);
     } else {
@@ -20,8 +18,8 @@ const persistentStorage: StateStorage = {
   },
   setItem: (key, newValue): void => {
     // Check if query params exist at all, can remove check if always want to set URL
-    if (getUrlSearch()) {
-      const searchParams = new URLSearchParams(getUrlSearch());
+    if (getQueryParams()) {
+      const searchParams = new URLSearchParams(getQueryParams());
       searchParams.set(key, JSON.stringify(newValue));
       window.history.replaceState(null, "", `?${searchParams.toString()}`);
     }
@@ -29,7 +27,7 @@ const persistentStorage: StateStorage = {
     localStorage.setItem(key, JSON.stringify(newValue));
   },
   removeItem: (key): void => {
-    const searchParams = new URLSearchParams(getUrlSearch());
+    const searchParams = new URLSearchParams(getQueryParams());
     searchParams.delete(key);
     window.location.search = searchParams.toString();
   },
