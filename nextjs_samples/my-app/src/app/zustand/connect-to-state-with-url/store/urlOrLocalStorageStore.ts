@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, StateStorage, createJSONStorage } from "zustand/middleware";
 
 const getUrlSearch = () => {
+  // slice(1) で?以降を取得
   return window.location.search.slice(1);
 };
 
@@ -62,8 +63,8 @@ const useLocalAndUrlStore = create(
       numberOfBears: 0,
       setNumberOfBears: (numberOfBears) => set(() => ({ numberOfBears })),
     }),
-    storageOptions
-  )
+    storageOptions,
+  ),
 );
 
 export default useLocalAndUrlStore;
