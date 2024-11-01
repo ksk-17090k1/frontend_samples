@@ -96,6 +96,7 @@ function Page4Child() {
       FallbackComponent={ErrorFallback}
       onError={onError}
       onReset={onReset}
+      // resetKeysプロパティは、特定のキーの値が変わると自動的にエラー状態をリセットするための依存配列を指定する。
       // TODO: なんかここなくてもエラー直せる、、、なぜ、、、
       resetKeys={[throwError]}
     >
