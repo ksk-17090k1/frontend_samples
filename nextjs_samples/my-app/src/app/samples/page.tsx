@@ -15,6 +15,9 @@ export const Samples = () => {
       <div>
         <Link href="/samples/dnd-move">Drag and drop Move</Link>
       </div>
+      <div>
+        <Link href="/samples/url-search-params">URLSearchParams</Link>
+      </div>
     </>
   );
 };

@@ -4,6 +4,7 @@ import { CssMChadcnBadge } from "./components/CssMChadcnBadge";
 import { CvaSample } from "./components/CvaSample";
 import { ErrorBoundaryBasic } from "./components/ErrorBoundaryBasic";
 import { TSTableBasic } from "./components/TSTableBasic";
+import { TSTableFilter } from "./components/TSTableFilter";
 import { TSTableHeaderGroups } from "./components/TSTableHeaderGroups";
 import { Badge } from "./components/ui/badge";
 
@@ -27,9 +28,16 @@ function App() {
           Chadcn/ui extended by CSS Module
         </CssMChadcnBadge>
       </div>
-      {/* <div><TSTableBasic /></div> */}
-      {/* <div><TSTableHeaderGroups /></div> */}
-      <ErrorBoundaryBasic />
+      <div>
+        <TSTableBasic />
+      </div>
+      <div>
+        <TSTableHeaderGroups />
+      </div>
+      <div>
+        <TSTableFilter />
+      </div>
+      {/* <ErrorBoundaryBasic /> */}
     </>
   );
 }

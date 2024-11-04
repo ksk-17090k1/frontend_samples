@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../every_layout/stack/style.css" />
+    <link rel="stylesheet" href="../../every_layout/center/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="stack center">
+      <!-- labelもinputもインライン要素である。 -->
+      <section>
+        <!-- labelのforとinputのidを関連させる -->
+        <label for="usernameControl">Username: </label>
+        <input type="text" id="usernameControl" name="username" />
+
+        <!-- labelの中にinputを入れるとforとidが不要になる。個人的にはこっちのがスッキリして好み -->
+        <label
+          >Address:
+          <input type="text" name="address" />
+        </label>
+      </section>
+
+      <section>
+        <input type="checkbox" id="checkControl1" />
+        <label for="checkControl1">Click me</label>
+
+        <label>
+          <input type="checkbox" />
+          Click me
+        </label>
+      </section>
+
+      <section>
+        <input type="radio" id="radioControl1" name="radioControl" />
+        <label for="radioControl1">Option 1</label>
+
+        <label>
+          <input type="radio" name="radioControl" />
+          Option 2
+        </label>
+
+        <label>
+          <input type="radio" name="radioControl" />
+          Option 3
+        </label>
+      </section>
+    </div>
+  </body>
+</html>
