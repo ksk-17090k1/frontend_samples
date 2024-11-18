@@ -1,0 +1,66 @@
+.tr {
+  display: flex;
+  width: fit-content;
+  height: 30px;
+}
+
+.th,
+.td {
+  padding: 0.25rem;
+  box-shadow: inset 0 0 0 1px lightgray;
+}
+
+.th {
+  /* このrelative大事 */
+  position: relative;
+  height: 30px;
+  padding: 2px 4px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.td {
+  height: 30px;
+}
+
+.divTable {
+  width: fit-content;
+  border: 1px solid lightgray;
+}
+
+/* リサイズするためのバー */
+.resizer {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  touch-action: none;
+  cursor: col-resize;
+  user-select: none;
+  background: rgb(0 0 0 / 50%);
+}
+
+/* ltrかrtlかで動的に変えているが、基本ltrで良い気がする */
+.resizer.ltr {
+  right: 0;
+}
+
+.resizer.rtl {
+  left: 0;
+}
+
+.resizer.isResizing {
+  background: blue;
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .resizer {
+    /* ホバーしてないときは消す */
+    opacity: 0;
+  }
+
+  *:hover > .resizer {
+    opacity: 1;
+  }
+}

@@ -16,7 +16,9 @@ import {
 import { makeData, Person } from "./TSTableFilterMakeData";
 
 declare module "@tanstack/react-table" {
-  //allows us to define custom properties for our columns
+  // カラム定義で独自のプロパティ`filterVariant`を定義する！
+  // TODO: ESlintに怒られているの治す
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "select";
   }
@@ -29,7 +31,9 @@ export const TSTableFilter = () => {
     [],
   );
 
-  const columns = React.useMemo<ColumnDef<Person, any>[]>(
+  // NOTE: カラム定義のときに`filterFn`を定義するやり方もあるが、このサンプルは使っていない。
+  //       filters fuzzyのサンプルはfilterFn使っている
+  const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
         accessorKey: "firstName",
@@ -47,11 +51,11 @@ export const TSTableFilter = () => {
         header: "Full Name",
         cell: (info) => info.getValue(),
       },
-      // rangeとselectのfilterはmetaで指定する必要がある模様。
       {
         accessorKey: "age",
         header: () => "Age",
         meta: {
+          // 独自のプロパティ
           filterVariant: "range",
         },
       },
@@ -59,6 +63,7 @@ export const TSTableFilter = () => {
         accessorKey: "visits",
         header: () => <span>Visits</span>,
         meta: {
+          // 独自のプロパティ
           filterVariant: "range",
         },
       },
@@ -66,6 +71,7 @@ export const TSTableFilter = () => {
         accessorKey: "status",
         header: "Status",
         meta: {
+          // 独自のプロパティ
           filterVariant: "select",
         },
       },
@@ -73,6 +79,7 @@ export const TSTableFilter = () => {
         accessorKey: "progress",
         header: "Profile Progress",
         meta: {
+          // 独自のプロパティ
           filterVariant: "range",
         },
       },
@@ -81,13 +88,12 @@ export const TSTableFilter = () => {
   );
 
   const [data, setData] = React.useState<Person[]>(() => makeData(5_000));
-  const refreshData = () => setData((_old) => makeData(50_000)); // stress test
+  const refreshData = () => setData(() => makeData(50_000)); // stress test
 
   const table = useReactTable({
     data,
     columns,
     filterFns: {},
-    // filter関連のstateをtanstack tableの外のstateで管理する
     state: {
       columnFilters,
     },
@@ -131,6 +137,7 @@ export const TSTableFilter = () => {
                         </div>
                         {header.column.getCanFilter() ? (
                           <div>
+                            {/* ここが本命のFilter実装の箇所 */}
                             <Filter column={header.column} />
                           </div>
                         ) : null}
@@ -161,7 +168,7 @@ export const TSTableFilter = () => {
           })}
         </tbody>
       </table>
-      {/* 以下ページネーションの最小限の実装として参考になる */}
+      {/* 以下ページネーションの実装(もう実装から外してもよい) */}
       <div className="h-2" />
       <div className="flex items-center gap-2">
         <button
@@ -244,10 +251,16 @@ export const TSTableFilter = () => {
   );
 };
 
-function Filter({ column }: { column: Column<any, unknown> }) {
+const Filter = ({ column }: { column: Column<Person, unknown> }) => {
   const columnFilterValue = column.getFilterValue();
+  // 独自定義したfilterVariantプロパティの値を取得
   const { filterVariant } = column.columnDef.meta ?? {};
 
+  // NOTE: 例えばフィルタに999を入れたい場合は、9と99ではフィルタ実行をしなくて良いので、
+  //       パフォーマンスの観点でデバウンスを実装する！！！！！
+
+  // NOTE: paginationのフィルタの例では、カラムの一番最初の値を取得して、それがnumberかstringかでフィルタの種類を変えている
+  //       今回のようなselectのタイプのフィルタに対応するには filterVariant を使ったやりかたのほうがよさそう。
   return filterVariant === "range" ? (
     <div>
       <div className="flex space-x-2">
@@ -292,12 +305,14 @@ function Filter({ column }: { column: Column<any, unknown> }) {
       type="text"
       value={(columnFilterValue ?? "") as string}
     />
+    // TODO: 下のコメントの通りに調べにいく
     // See faceted column filters example for datalist search suggestions
   );
-}
+};
 
 // A typical debounced input react component
-function DebouncedInput({
+// これは別途コードサンプルとして切り出してもいる
+const DebouncedInput = ({
   value: initialValue,
   onChange,
   debounce = 500,
@@ -306,20 +321,25 @@ function DebouncedInput({
   value: string | number;
   onChange: (value: string | number) => void;
   debounce?: number;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) {
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) => {
   const [value, setValue] = React.useState(initialValue);
 
+  // 初期値が変わったらレンダリングしなおし
   React.useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
 
+  // valueが変わったら一定時間後にイベントハンドラを実行する
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       onChange(value);
     }, debounce);
 
+    // ここが一番のポイント！
+    // 新しい入力が発生すると、前回のタイマーが clearTimeout によってクリアされるため、
+    // 入力の頻度が多くても一定間隔でしか onChange が呼び出されない
     return () => clearTimeout(timeout);
-  }, [value]);
+  }, [value, debounce, onChange]);
 
   return (
     <input
@@ -328,4 +348,4 @@ function DebouncedInput({
       onChange={(e) => setValue(e.target.value)}
     />
   );
-}
+};

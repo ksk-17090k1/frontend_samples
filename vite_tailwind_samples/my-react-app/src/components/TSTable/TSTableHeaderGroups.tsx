@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   createColumnHelper,
   flexRender,
@@ -45,54 +44,54 @@ const defaultData: Person[] = [
 
 const columnHelper = createColumnHelper<Person>();
 
-// NOTE: accessor()の第一引数はdata側のキーと一致する必要がある
-// columnHelper はTypeScriptの型を付与するためのヘルパー関数
-// columnHelper使わないなら以下のようにも書ける
-// const columns = [{
-//     cell: info => info.getValue(),
-//     footer: info => info.column.id,
-// }]
-
-// また、columnHelperは第一引数がstringか関数かで関数の挙動が全く変わる。
+// HelloとInfoというヘッダーグループを作成
 const columns = [
-  // accessorの第一引数にstringを渡すと info.column.id に値が入る
-  columnHelper.accessor("firstName", {
-    cell: (info) => info.getValue(),
-    // info.column.id は上でaccessorの第一引数にしている"firstName"を返す
-    footer: (info) => info.column.id,
-    // 以下を指定すると info.column.id に値が入る
-    // id: "aaa",
+  columnHelper.group({
+    id: "hello",
+    header: () => <span>Hello</span>,
+    columns: [
+      columnHelper.accessor("firstName", {
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      }),
+      columnHelper.accessor((row) => row.lastName, {
+        id: "lastName",
+        cell: (info) => info.getValue(),
+        header: () => <span>Last Name</span>,
+        footer: (props) => props.column.id,
+      }),
+    ],
   }),
-  // accessorの第一引数が関数の場合
-  // この引数の関数はgetValue()の返り値を定義している模様
-  columnHelper.accessor((row) => row.lastName, {
-    // accessorの第一引数が関数の場合は id は必須ぽい
-    id: "lastNameVal",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Last Name</span>,
-    // これは上で定義している lastNameVal を参照する
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("age", {
-    header: () => "Age",
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("visits", {
-    header: () => <span>Visits</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("progress", {
-    header: "Profile Progress",
-    footer: (info) => info.column.id,
+  columnHelper.group({
+    header: "Info",
+    footer: (props) => props.column.id,
+    columns: [
+      columnHelper.accessor("age", {
+        header: () => "Age",
+        footer: (props) => props.column.id,
+      }),
+      columnHelper.group({
+        header: "More Info",
+        columns: [
+          columnHelper.accessor("visits", {
+            header: () => <span>Visits</span>,
+            footer: (props) => props.column.id,
+          }),
+          columnHelper.accessor("status", {
+            header: "Status",
+            footer: (props) => props.column.id,
+          }),
+          columnHelper.accessor("progress", {
+            header: "Profile Progress",
+            footer: (props) => props.column.id,
+          }),
+        ],
+      }),
+    ],
   }),
 ];
 
-export const TSTableBasic = () => {
+export const TSTableHeaderGroups = () => {
   const [data] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
 
@@ -106,12 +105,10 @@ export const TSTableBasic = () => {
     <div className="p-2">
       <table>
         <thead>
-          {/* ヘッダーグループを定義してなくても table.getHeaderGroups() とするのは１つポイントかも */}
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {/* ここの部分で値をセット */}
+                <th key={header.id} colSpan={header.colSpan}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -128,7 +125,6 @@ export const TSTableBasic = () => {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
-                  {/* ここの部分で値をセット */}
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -139,8 +135,7 @@ export const TSTableBasic = () => {
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {/* ここの部分で値をセット */}
+                <th key={header.id} colSpan={header.colSpan}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(

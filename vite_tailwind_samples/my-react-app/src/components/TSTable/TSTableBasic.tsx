@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   createColumnHelper,
   flexRender,
@@ -44,55 +45,45 @@ const defaultData: Person[] = [
 
 const columnHelper = createColumnHelper<Person>();
 
-// HelloとInfoというヘッダーグループを作成
 const columns = [
-  columnHelper.group({
-    id: "hello",
-    header: () => <span>Hello</span>,
-    // footer: props => props.column.id,
-    columns: [
-      columnHelper.accessor("firstName", {
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-      }),
-      columnHelper.accessor((row) => row.lastName, {
-        id: "lastName",
-        cell: (info) => info.getValue(),
-        header: () => <span>Last Name</span>,
-        footer: (props) => props.column.id,
-      }),
-    ],
+  // accessorの第一引数にstringを渡すと info.column.id に値が入る
+  columnHelper.accessor("firstName", {
+    cell: (info) => info.getValue(),
+    // info.column.id は上でaccessorの第一引数にしている"firstName"を返す
+    footer: (info) => info.column.id,
+    // 以下を指定すると info.column.id に値が入る
+    // id: "aaa",
   }),
-  columnHelper.group({
-    header: "Info",
-    footer: (props) => props.column.id,
-    columns: [
-      columnHelper.accessor("age", {
-        header: () => "Age",
-        footer: (props) => props.column.id,
-      }),
-      columnHelper.group({
-        header: "More Info",
-        columns: [
-          columnHelper.accessor("visits", {
-            header: () => <span>Visits</span>,
-            footer: (props) => props.column.id,
-          }),
-          columnHelper.accessor("status", {
-            header: "Status",
-            footer: (props) => props.column.id,
-          }),
-          columnHelper.accessor("progress", {
-            header: "Profile Progress",
-            footer: (props) => props.column.id,
-          }),
-        ],
-      }),
-    ],
+  // accessorの第一引数が関数の場合
+  // この引数の関数はgetValue()の返り値を定義している模様
+  columnHelper.accessor((row) => row.lastName, {
+    // accessorの第一引数が関数の場合は id は必須ぽい
+    id: "lastNameVal",
+    cell: (info) => <i>{info.getValue()}</i>,
+    header: () => <span>Last Name</span>,
+    // これは上で定義している lastNameVal を参照する
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("age", {
+    header: () => "Age",
+    cell: (info) => info.renderValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("visits", {
+    header: () => <span>Visits</span>,
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("progress", {
+    header: "Profile Progress",
+    footer: (info) => info.column.id,
   }),
 ];
 
-export const TSTableHeaderGroups = () => {
+export const TSTableBasic = () => {
   const [data] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
 
@@ -109,7 +100,7 @@ export const TSTableHeaderGroups = () => {
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan}>
+                <th key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -136,7 +127,7 @@ export const TSTableHeaderGroups = () => {
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan}>
+                <th key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(

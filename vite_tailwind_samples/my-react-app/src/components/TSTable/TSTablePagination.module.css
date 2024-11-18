@@ -1,0 +1,42 @@
+html .pagination {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+table.pagination {
+  border: 1px solid lightgray;
+}
+
+tbody.pagination {
+  border-bottom: 1px solid lightgray;
+}
+
+th.pagination {
+  padding: 2px 4px;
+  border-right: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+tfoot.pagination {
+  color: gray;
+}
+
+tfoot th.pagination {
+  font-weight: normal;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+}
+
+.pagination pre {
+  padding: 1em;
+  margin: 1em 0;
+  overflow-x: auto;
+  color: #fff;
+  background: #25292f;
+  border-radius: 5px;
+
+  /* モバイルでのスクロール用 */
+  -webkit-overflow-scrolling: touch;
+}
