@@ -1,14 +1,14 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+import { getContact } from "../contacts";
+
+export async function loader({ params }) {
+  // params.contactId でURL Paramsを取得できる
+  const contact = await getContact(params.contactId);
+  return { contact };
+}
 
 export default function Contact() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://robohash.org/you.png?size=200x200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+  const { contact } = useLoaderData();
 
   return (
     <div id="contact">
@@ -45,12 +45,16 @@ export default function Contact() {
         {contact.notes && <p>{contact.notes}</p>}
 
         <div>
+          {/* actionで相対パスを指定できる！この場合は ./edit に飛ぶ */}
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
+          {/* actionで相対パスを指定できる！この場合は ./destroy に飛ぶ */}
           <Form
             method="post"
             action="destroy"
+            // onSubmitで確認ダイアログを表示する実装。event.preventDefault() の使い方などふつうに参考になる。
+            // あと地味に onSubmit が実行された後に Form によりactionが実行されることに注意。
             onSubmit={(event) => {
               if (!confirm("Please confirm you want to delete this record.")) {
                 event.preventDefault();

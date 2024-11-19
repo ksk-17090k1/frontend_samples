@@ -1,4 +1,11 @@
-import { Outlet, Link, useLoaderData, Form } from "react-router-dom";
+import {
+  Outlet,
+  useLoaderData,
+  Form,
+  redirect,
+  NavLink,
+  useNavigation,
+} from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
 
 // loaderとactionの設定
@@ -9,12 +16,13 @@ export async function loader() {
 }
 export async function action() {
   const contact = await createContact();
-  return { contact };
+  return redirect(`/contacts/${contact.id}/edit`);
 }
 
 export default function Root() {
   // browser routerで設定されたloaderからデータを取得
   const { contacts } = useLoaderData();
+  const navigation = useNavigation();
   return (
     <>
       <div id="sidebar">
@@ -31,7 +39,9 @@ export default function Root() {
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
           </form>
-          {/* NOTE: 普通のformタグだとviteサーバにPOSTが送られて404エラーになる */}
+          {/* NOTE: この部分は普通のformタグを模倣している。ただし、普通のformタグだとviteサーバにPOSTが送られて404エラーになる */}
+          {/* react-router ではPOSTの代わりにroute actionに指定した関数が実行される */}
+          {/* しかも、actionが走った後には useLoaderData が自動的にrevalidateされる。really cool! */}
           <Form method="post">
             <button type="submit">New</button>
           </Form>
@@ -41,7 +51,13 @@ export default function Root() {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                  <Link to={`contacts/${contact.id}`}>
+                  {/* NavLinkはclassNameに関数を渡せる。Linkではできない。 */}
+                  <NavLink
+                    to={`contacts/${contact.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                  >
                     {contact.first || contact.last ? (
                       <>
                         {contact.first} {contact.last}
@@ -50,7 +66,7 @@ export default function Root() {
                       <i>No Name</i>
                     )}{" "}
                     {contact.favorite && <span>★</span>}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -61,7 +77,10 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>

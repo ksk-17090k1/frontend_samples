@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -25,6 +25,8 @@
     </style>
   </head>
   <body>
+    <!-- TODO: formAndInput と統合 -->
+    <!--  -->
     <!-- actionにはURLやPHPのプログラム名を入れる -->
     <form action="http://example.jp/article" method="get" class="form-example">
       <div class="form-example">
@@ -51,12 +53,16 @@
     <!-- これは application/xwwwformurlencoded 形式と呼ばれる -->
     <form method="POST" action="http://example.jp/article">
       <div>
-        <label>題名：<input type="text" id="title" name="title" /></label>
+        <label> 題名：<input type="text" id="title" name="title" /> </label>
       </div>
       <div>
         <label>著者：<input type="text" id="author" name="author" /></label>
       </div>
       <input type="submit" name="submit" value="検索" />
+    </form>
+    <!-- type=search の場合 -->
+    <form id="search-form" role="search">
+      <input id="q" placeholder="Search" type="search" name="q" />
     </form>
   </body>
 </html>
