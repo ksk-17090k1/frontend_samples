@@ -18,6 +18,7 @@ import { ErrorBoundaryBasic } from "./components/ErrorBoundaryBasic";
 
 import "./index.css";
 import { ClsxAndCvaSamples } from "./components/clsx-and-cva/ClsxAndCvaSamples";
+import { TaskPage } from "./components/shadcn/tasks";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: "/error-boundary",
         element: <ErrorBoundaryBasic />,
+      },
+      {
+        path: "/shadcn-task",
+        element: <TaskPage />,
       },
     ],
   },

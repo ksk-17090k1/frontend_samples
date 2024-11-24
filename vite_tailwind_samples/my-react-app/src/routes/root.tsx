@@ -25,6 +25,9 @@ export const Root = () => {
             <li>
               <NavLink to="/error-boundary">Error Boundary</NavLink>
             </li>
+            <li>
+              <NavLink to="/shadcn-task">Shadcn/ui Task Page</NavLink>
+            </li>
           </div>
           <div className={boxStyle.box} style={borderCssVal}>
             <TanstaclTable />
