@@ -1,0 +1,32 @@
+.box {
+  --border-thin: 1px;
+  --padding: var(--s1);
+
+  /* paddingはレイアウトプリミティブの公理で四辺に同じ大きさで付ける */
+  padding: var(--padding);
+  color: var(--color-dark);
+  background-color: var(--color-light);
+
+  /* borderもレイアウトプリミティブの公理で四辺につける */
+  border: var(--border-thin) solid gray;
+
+  /* 常に透明のアウトラインを適用することでwindowsのハイコントラストテーマに備える
+       ハイコントラストモードがONになっていないときはoutlineはスタイルに影響しない */
+  outline: var(--border-thin) transparent;
+
+  /* outline-offset を負の値にすることでハイコントラストモードが有効になっているときはoutlineはBoxの境界の中に移動しボーダーのように機能する */
+  outline-offset: calc(var(--border-thin) * -1);
+
+  /* light themeとdark themeの色を準備 */
+  --color-light: #fff;
+  --color-dark: #000;
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
