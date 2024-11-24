@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page";
 import { Root } from "./routes/root";
-import ClsxSample from "./components/ClsxSample";
-import { CvaSample } from "./components/CvaSample";
 import { Badge } from "./components/ui/badge";
 import { CssMChadcnBadge } from "./components/CssMChadcnBadge";
 import { TSTableBasic } from "./components/TSTable/TSTableBasic";
@@ -19,6 +17,7 @@ import { TSTableHeaderGroups } from "./components/TSTable/TSTableHeaderGroups";
 import { ErrorBoundaryBasic } from "./components/ErrorBoundaryBasic";
 
 import "./index.css";
+import { ClsxAndCvaSamples } from "./components/clsx-and-cva/ClsxAndCvaSamples";
 
 const router = createBrowserRouter([
   {
@@ -28,18 +27,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/clsx-and-cva-sample",
-        element: (
-          <>
-            <div>
-              <ClsxSample intent="danger" />
-            </div>
-            <div>
-              <CvaSample intent={"primary"} size={"small"}>
-                Button
-              </CvaSample>
-            </div>
-          </>
-        ),
+        element: <ClsxAndCvaSamples />,
       },
       {
         path: "/shadcn-badge",

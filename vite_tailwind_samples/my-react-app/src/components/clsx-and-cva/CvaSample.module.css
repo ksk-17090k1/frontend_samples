@@ -1,7 +1,7 @@
 .base {
   display: inline-flex;
-  border-width: 1px;
   border-style: solid;
+  border-width: 1px;
 }
 
 .primary {
@@ -15,8 +15,8 @@
 }
 
 .secondary {
-  background-color: rgb(255 255 255);
   color: rgb(31 41 55);
+  background-color: rgb(255 255 255);
   border-color: rgb(156 163 175);
 }
 
@@ -25,15 +25,15 @@
 }
 
 .small {
+  padding: 0.25rem 0.5rem;
   font-size: 0.875rem /* 14px */;
   line-height: 1.25rem /* 20px */;
-  padding: 0.25rem 0.5rem;
 }
 
 .medium {
+  padding: 0.5rem 1rem;
   font-size: 1rem /* 16px */;
   line-height: 1.5rem /* 24px */;
-  padding: 0.5rem 1rem;
 }
 
 .primaryMedium {
