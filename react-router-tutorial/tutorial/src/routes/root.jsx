@@ -5,14 +5,18 @@ import {
   redirect,
   NavLink,
   useNavigation,
+  useSubmit,
 } from "react-router-dom";
+import { useEffect } from "react";
 import { getContacts, createContact } from "../contacts";
 
 // loaderとactionの設定
 // これらはbrowser routerの設定ファイルからimportして使う
-export async function loader() {
-  const contacts = await getContacts();
-  return { contacts };
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const contacts = await getContacts(q);
+  return { contacts, q };
 }
 export async function action() {
   const contact = await createContact();
@@ -21,24 +25,46 @@ export async function action() {
 
 export default function Root() {
   // browser routerで設定されたloaderからデータを取得
-  const { contacts } = useLoaderData();
+  const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
+  const submit = useSubmit();
+
+  // navigation.location はページ遷移中だと遷移先のURLが値に入る。遷移中でないとnullかundefined
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
+
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]);
+
   return (
     <>
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+          <Form id="search-form" role="search">
             <input
               id="q"
+              className={searching ? "loading" : ""}
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
               name="q"
+              //   defaultValue={q}
+              // イベントハンドラはstateと同じくスナップショットなので、q=null の状態から発火したときは isFirstSearch=true
+              onChange={(event) => {
+                const isFirstSearch = q == null;
+                // ここの event.currentTarget.form はいったん暗記でよいかも
+                submit(event.currentTarget.form, {
+                  // replace: true のときブラウザの最新の履歴を上書きする
+                  replace: !isFirstSearch,
+                });
+              }}
             />
-            <div id="search-spinner" aria-hidden hidden={true} />
+            <div id="search-spinner" aria-hidden hidden={!searching} />
             <div className="sr-only" aria-live="polite"></div>
-          </form>
+          </Form>
           {/* NOTE: この部分は普通のformタグを模倣している。ただし、普通のformタグだとviteサーバにPOSTが送られて404エラーになる */}
           {/* react-router ではPOSTの代わりにroute actionに指定した関数が実行される */}
           {/* しかも、actionが走った後には useLoaderData が自動的にrevalidateされる。really cool! */}

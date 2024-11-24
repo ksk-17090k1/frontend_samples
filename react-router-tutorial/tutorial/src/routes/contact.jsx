@@ -1,10 +1,25 @@
-import { Form, useLoaderData } from "react-router-dom";
-import { getContact } from "../contacts";
+import { Form, useLoaderData, useFetcher } from "react-router-dom";
+import { getContact, updateContact } from "../contacts";
 
 export async function loader({ params }) {
   // params.contactId でURL Paramsを取得できる
   const contact = await getContact(params.contactId);
+  // エラーハンドリング
+  // ErrorでなくてResponseをthrowしているのなにげにポイントかも
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
   return { contact };
+}
+
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  return updateContact(params.contactId, {
+    favorite: formData.get("favorite") === "true",
+  });
 }
 
 export default function Contact() {
@@ -69,10 +84,19 @@ export default function Contact() {
   );
 }
 
-function Favorite({ contact }) {
-  const favorite = contact.favorite;
+const Favorite = ({ contact }) => {
+  const fetcher = useFetcher();
+  // fetcher.formData はOptimistic UIと呼ばれる。
+  // fetcher.formDataはsubmitされたデータに即アクセスできる。
+  // actionが実行完了すると、fetcher.formDataはnullになり、下のコードだとloadされたcontact.favoriteが使われる。
+  const favorite = fetcher.formData
+    ? fetcher.formData.get("favorite") === "true"
+    : contact.favorite;
+
   return (
-    <Form method="post">
+    // navigationを発生させずに action -> load を実行したい場合は、fetcher.Form を使う
+    <fetcher.Form method="post">
+      {/* 地味にbutton単体で完結させてsubmit飛ばせるんだとおもった。 */}
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
@@ -80,6 +104,6 @@ function Favorite({ contact }) {
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
-}
+};
