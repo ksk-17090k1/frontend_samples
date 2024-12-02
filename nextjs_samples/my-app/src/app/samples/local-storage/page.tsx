@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 
 // custom hook
 export const useLocalStorage = (key: string) => {
-  const [value, setValue] = useState<string>("initial value");
+  const [value, setValue] = useState<string | undefined>(undefined);
 
+  // Next.jsでは絶対一度Server-side Renderingが走るのでuseEffectで囲む
   useEffect(() => {
     const res = window.localStorage.getItem(key);
-    setValue(res == null ? "local storage is empty" : res);
+    setValue(res == null ? undefined : res);
   }, [key]);
 
   const setValueAndStorage = (newValue: string) => {

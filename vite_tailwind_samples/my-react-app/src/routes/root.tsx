@@ -28,6 +28,9 @@ export const Root = () => {
             <li>
               <NavLink to="/shadcn-task">Shadcn/ui Task Page</NavLink>
             </li>
+            <li>
+              <NavLink to="/i18n-sample">i18n sample</NavLink>
+            </li>
           </div>
           <div className={boxStyle.box} style={borderCssVal}>
             <TanstaclTable />

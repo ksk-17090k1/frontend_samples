@@ -4,7 +4,7 @@ import detector from "i18next-browser-languagedetector";
 import en from "./en";
 import ja from "./ja";
 
-// NOTE: app.tsxにこのファイルをimportするのを忘れずに！
+// NOTE: app.tsx か main.tsx にこのファイルをimportするのを忘れずに！
 
 export const LANGUAGES: {
   value: string;
