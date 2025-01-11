@@ -1,0 +1,5 @@
+/* はてなブログのスタイルをパクった */
+strong {
+    font-weight: bold;
+    background: linear-gradient(transparent 70%, #fff799 70%);
+  }
