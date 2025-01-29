@@ -12,22 +12,22 @@ export const useLocalStorage = (key: string) => {
     setValue(res == null ? undefined : res);
   }, [key]);
 
-  const setValueAndStorage = (newValue: string) => {
+  const setItemToLocalStorage = (newValue: string) => {
     window.localStorage.setItem(key, newValue);
     setValue(newValue);
   };
-  return { value, setValueAndStorage };
+  return { value, setItemToLocalStorage };
 };
 
 export const LocalStorage = () => {
-  const { value, setValueAndStorage } = useLocalStorage("storage-key");
+  const { value, setItemToLocalStorage } = useLocalStorage("storage-key");
 
   return (
     <>
       <p>value: {value}</p>
       <button
         onClick={() => {
-          setValueAndStorage(Math.random().toString());
+          setItemToLocalStorage(Math.random().toString());
         }}
       >
         setStorage
