@@ -20,6 +20,7 @@ import "./index.css";
 import { ClsxAndCvaSamples } from "./components/clsx-and-cva/ClsxAndCvaSamples";
 import { TaskPage } from "./components/shadcn/tasks";
 import I18nSample from "./components/I18nSample";
+import MarkdownSample from "./components/react-markdown/MarkdownSample";
 
 import "./i18n";
 
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
       {
         path: "/i18n-sample",
         element: <I18nSample />,
+      },
+      {
+        path: "/markdown-sample",
+        element: <MarkdownSample />,
       },
     ],
   },
