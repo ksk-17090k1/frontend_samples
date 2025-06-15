@@ -1,5 +1,78 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import GitHubAlert from "./GitHubAlert";
+
+// 子要素からテキストを抽出するヘルパー関数
+const extractAllText = (nodes: React.ReactNode[]): string => {
+  return nodes
+    .map((node) => {
+      if (typeof node === "string") {
+        return node;
+      }
+      if (React.isValidElement(node)) {
+        const props = node.props as Record<string, unknown>;
+        if ("children" in props) {
+          const children = props.children;
+          if (Array.isArray(children)) {
+            return extractAllText(children);
+          }
+          return extractAllText([children as React.ReactNode]);
+        }
+      }
+      return "";
+    })
+    .join("");
+};
+
+// GitHubアラート記法を検出するヘルパー関数
+const parseGitHubAlert = (text: string) => {
+  const cleanText = text.replace(/^\s+/, "").replace(/\s+$/, "");
+
+  // GitHubアラート記法のパターンマッチング
+  let alertMatch = cleanText.match(
+    /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][\s\n]+(.*)/is,
+  );
+
+  // より緩いパターンも試す
+  if (!alertMatch) {
+    alertMatch = cleanText.match(
+      /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)/s,
+    );
+  }
+
+  if (alertMatch) {
+    const alertType = alertMatch[1].toLowerCase() as
+      | "note"
+      | "tip"
+      | "important"
+      | "warning"
+      | "caution";
+    const content = alertMatch[2].trim();
+
+    return { type: alertType, content };
+  }
+
+  return null;
+};
+
+// blockquoteをレンダリングするヘルパー関数
+const renderBlockquote = (children: React.ReactNode) => {
+  const childrenArray = React.Children.toArray(children);
+  const fullText = extractAllText(childrenArray);
+  const alertData = parseGitHubAlert(fullText);
+
+  if (alertData) {
+    return <GitHubAlert type={alertData.type}>{alertData.content}</GitHubAlert>;
+  }
+
+  // 通常のblockquoteとして処理
+  return (
+    <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-4 text-gray-600">
+      {children}
+    </blockquote>
+  );
+};
 
 const MarkdownSample: React.FC = () => {
   const markdownContent = `
@@ -22,6 +95,21 @@ Markdownテキストが自動的にHTMLに変換されます。
 \`\`\`javascript
 console.log('コードブロックも表示できます');
 \`\`\`
+
+> [!NOTE]
+> これはNOTEアラートです。重要な情報を表示します。
+
+> [!TIP]
+> これはTIPアラートです。便利なヒントを表示します。
+
+> [!IMPORTANT]
+> これはIMPORTANTアラートです。重要な情報を強調します。
+
+> [!WARNING]
+> これはWARNINGアラートです。注意が必要な情報を表示します。
+
+> [!CAUTION]
+> これはCAUTIONアラートです。危険な操作に関する警告を表示します。
   `;
 
   return (
@@ -30,7 +118,7 @@ console.log('コードブロックも表示できます');
         React Markdown サンプル
       </h1>
 
-      <div className="bg-white rounded-lg shadow-lg p-6 prose prose-lg max-w-none">
+      <div className="rounded-lg shadow-lg p-6 prose prose-lg max-w-none markdown-body">
         <ReactMarkdown
           // componentsを指定しないとマークダウンから変換されたHTMLはスタイルが当たらない
           // もう少し厳密にいうと、tailwindcss使っているのでデフォルトだとスタイルがあたってないので。
@@ -43,18 +131,36 @@ console.log('コードブロックも表示できます');
             h2: ({ children }) => (
               <h2 className="text-2xl font-semibold mb-3">{children}</h2>
             ),
+            h3: ({ children }) => (
+              <h3 className="text-xl font-semibold mb-2">{children}</h3>
+            ),
             p: ({ children }) => (
               <p className="mb-4 text-gray-700">{children}</p>
             ),
             ul: ({ children }) => (
               <ul className="list-disc list-inside mb-4">{children}</ul>
             ),
+            li: ({ children }) => <li className="mb-1">{children}</li>,
             code: ({ children }) => (
-              <code className="bg-gray-100 px-2 py-1 rounded">{children}</code>
+              <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
+                {children}
+              </code>
             ),
+            pre: ({ children }) => (
+              <pre className="bg-gray-100 p-4 rounded mb-4 overflow-x-auto">
+                {children}
+              </pre>
+            ),
+            strong: ({ children }) => (
+              <strong className="font-bold">{children}</strong>
+            ),
+            em: ({ children }) => <em className="italic">{children}</em>,
+            blockquote: ({ children }) => {
+              return renderBlockquote(children);
+            },
           }}
-          // 大体の場合、githubのマークダウンの記法も使いたいので、remarkGfmを指定することが多い。
-          //   remarkPlugins={[remarkGfm]}
+          // 大体の場合、githubのマークダウンの記法や数式も使いたいので、remarkGfmやremarkMathを指定することが多い。
+          remarkPlugins={[remarkGfm]}
         >
           {markdownContent}
         </ReactMarkdown>
