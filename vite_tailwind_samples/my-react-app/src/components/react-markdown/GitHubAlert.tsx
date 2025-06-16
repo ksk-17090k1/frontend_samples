@@ -1,7 +1,8 @@
 import React from "react";
+import type { AlertType } from "./gitHubAlertUtils";
 
 interface GitHubAlertProps {
-  type: "note" | "tip" | "important" | "warning" | "caution";
+  type: AlertType;
   children: React.ReactNode;
 }
 

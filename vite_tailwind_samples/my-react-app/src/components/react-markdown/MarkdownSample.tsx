@@ -2,6 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import GitHubAlert from "./GitHubAlert";
+import { parseGitHubAlert } from "./gitHubAlertUtils";
 
 // 子要素からテキストを抽出するヘルパー関数
 const extractAllText = (nodes: React.ReactNode[]): string => {
@@ -23,37 +24,6 @@ const extractAllText = (nodes: React.ReactNode[]): string => {
       return "";
     })
     .join("");
-};
-
-// GitHubアラート記法を検出するヘルパー関数
-const parseGitHubAlert = (text: string) => {
-  const cleanText = text.replace(/^\s+/, "").replace(/\s+$/, "");
-
-  // GitHubアラート記法のパターンマッチング
-  let alertMatch = cleanText.match(
-    /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][\s\n]+(.*)/is,
-  );
-
-  // より緩いパターンも試す
-  if (!alertMatch) {
-    alertMatch = cleanText.match(
-      /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)/s,
-    );
-  }
-
-  if (alertMatch) {
-    const alertType = alertMatch[1].toLowerCase() as
-      | "note"
-      | "tip"
-      | "important"
-      | "warning"
-      | "caution";
-    const content = alertMatch[2].trim();
-
-    return { type: alertType, content };
-  }
-
-  return null;
 };
 
 // blockquoteをレンダリングするヘルパー関数
