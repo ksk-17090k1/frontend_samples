@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import GitHubAlert from "./GitHubAlert";
 import { parseGitHubAlert } from "./gitHubAlertUtils";
+import { Mermaid } from "./Marmaid";
 
 // 子要素からテキストを抽出するヘルパー関数
 const extractAllText = (nodes: React.ReactNode[]): string => {
@@ -66,6 +67,14 @@ Markdownテキストが自動的にHTMLに変換されます。
 console.log('コードブロックも表示できます');
 \`\`\`
 
+\`\`\`mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Bob->>Alice: Hi Alice
+    Alice->>Bob: Hi Bob
+\`\`\`
+
 > [!NOTE]
 > これはNOTEアラートです。重要な情報を表示します。
 
@@ -111,11 +120,19 @@ console.log('コードブロックも表示できます');
               <ul className="list-disc list-inside mb-4">{children}</ul>
             ),
             li: ({ children }) => <li className="mb-1">{children}</li>,
-            code: ({ children }) => (
-              <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
-                {children}
-              </code>
-            ),
+            code: ({ children, className }) => {
+              // mermaidの場合(なお、この実装はSSRでは動かない模様)
+              if (className === "language-mermaid") {
+                return <Mermaid code={children as string} />;
+              } else {
+                // 通常のコードブロックの場合(Syntax Highlighterとかを入れたほうがいいらしい)
+                return (
+                  <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
+                    {children}
+                  </code>
+                );
+              }
+            },
             pre: ({ children }) => (
               <pre className="bg-gray-100 p-4 rounded mb-4 overflow-x-auto">
                 {children}
